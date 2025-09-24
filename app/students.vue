@@ -127,12 +127,12 @@ function changeSort(key) {
 </script>
 <template>
 	<div class="p-6">
-		<div class="flex justify-between items-center mb-4">
-	<h1 class="text-xl font-semibold">Student</h1>
+			<div class="flex justify-between items-center mb-4">
+				<h1 class="text-2xl font-bold mb-4">Students</h1>
 			<div class="flex gap-2">
 				<Button label="Add" icon="pi pi-plus" class="p-button-primary" />
 	<Button label="Bulk Update" icon="pi pi-pencil" class="p-button-outlined" />
-				<Button icon="pi pi-download" class="p-button-outlined" />
+			<Button icon="pi pi-upload" class="p-button-outlined" />
 				<Button icon="pi pi-sign-out" class="p-button-outlined" />
 			</div>
 		</div>

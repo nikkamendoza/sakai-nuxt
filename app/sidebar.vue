@@ -5,7 +5,8 @@
       <div class="bg-black rounded-lg w-12 h-12 flex items-center justify-center text-xl font-bold mb-2">T</div>
       <div class="font-semibold text-lg">Test School</div>
     </div>
-    <div v-for="section in ['FAVORITES','PREMISES','EDUCANDS','ASSOCIATES','APPS']" :key="section" class="sidebar-section mb-4">
+    <div class="border-t border-blue-300 opacity-30 my-2"></div>
+    <div v-for="(section, idx) in ['FAVORITES','PREMISES','EDUCANDS','ASSOCIATES','APPS']" :key="section" class="sidebar-section mb-4">
       <div class="text-xs font-semibold text-blue-200 mb-2">{{ section }}</div>
       <div v-for="item in menuItems.filter(i => i.section === section)" :key="item.page"
         class="flex items-center gap-2 py-2 cursor-pointer rounded"
@@ -15,6 +16,8 @@
         <i :class="item.icon"></i>
         <span>{{ item.label }}</span>
       </div>
+      <div v-if="idx < 4" class="border-t border-blue-300 opacity-30 my-2"></div>
+      <div v-if="idx === 4" class="border-t border-blue-300 opacity-30 my-2"></div>
     </div>
     <div class="mt-auto text-xs text-blue-200 text-center pt-8">© EduTrack-2024</div>
   </aside>
