@@ -1,0 +1,259 @@
+
+
+<template>
+  <div class="flex min-h-screen bg-gray-50">
+  <aside class="w-1/4 bg-white p-8 border-r border-gray-200 flex flex-col items-center">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-28 h-28 rounded-full mb-6 object-cover shadow" />
+      <div class="w-full">
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">First Name</div>
+          <div class="sidebar-value">John</div>
+        </div>
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">Last Name</div>
+          <div class="sidebar-value">Doe</div>
+        </div>
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">Date of Birth</div>
+          <div class="sidebar-value">September 21,2025</div>
+        </div>
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">Medication</div>
+          <div class="sidebar-value">Tylenol</div>
+        </div>
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">Diagnosis</div>
+          <div class="sidebar-value">Bipolar</div>
+        </div>
+        <div class="sidebar-info-block">
+          <div class="sidebar-label">Allergies</div>
+          <div class="sidebar-value">Seafood</div>
+        </div>
+      </div>
+    </aside>
+    <main class="flex-1 p-12">
+      <header class="flex items-center justify-between mb-8">
+        <h1 class="text-2xl font-semibold">Personal Information</h1>
+        <div class="flex gap-2">
+          <Button icon="pi pi-pencil" label="Edit" class="p-button-outlined p-button-sm" />
+          <Button icon="pi pi-print" class="p-button-outlined p-button-sm" />
+          <Button icon="pi pi-trash" class="p-button-outlined p-button-danger p-button-sm" />
+        </div>
+      </header>
+      <nav class="flex gap-2 border-b border-gray-200 mb-8 text-sm">
+        <Button
+          icon="pi pi-user"
+          label="Personal Info"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'personal' }"
+          style="border-radius:0;"
+          @click="activeTab = 'personal'"
+        />
+        <Button
+          icon="pi pi-map-marker"
+          label="Services Recommended"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'services' }"
+          style="border-radius:0;"
+          @click="activeTab = 'services'"
+        />
+        <Button
+          icon="pi pi-file"
+          label="Documents"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'documents' }"
+          style="border-radius:0;"
+          @click="activeTab = 'documents'"
+        />
+        <Button
+          icon="pi pi-comment"
+          label="Notes"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'notes' }"
+          style="border-radius:0;"
+          @click="activeTab = 'notes'"
+        />
+        <Button
+          icon="pi pi-users"
+          label="Staffs"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'staffs' }"
+          style="border-radius:0;"
+          @click="activeTab = 'staffs'"
+        />
+        <Button
+          icon="pi pi-calendar"
+          label="Schedules"
+          class="p-button-text tab-btn"
+          :class="{ 'tab-active': activeTab === 'schedules' }"
+          style="border-radius:0;"
+          @click="activeTab = 'schedules'"
+        />
+      </nav>
+      <section class="space-y-6">
+        <template v-if="activeTab === 'personal'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white">
+            <div class="flex items-center gap-2 font-semibold mb-4 text-lg"><i class="pi pi-user"></i> Student</div>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+              <div class="info-block">
+                <div class="info-label">Status</div>
+                <div class="info-value">Active</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Class</div>
+                <div class="info-value">Class 1</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Location</div>
+                <div class="info-value">Location</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Father Name</div>
+                <div class="info-value">Pending</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Mother Name</div>
+                <div class="info-value">Class 3</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Mother Maiden Name</div>
+                <div class="info-value">Location C</div>
+              </div>
+            </div>
+          </div>
+          <div class="border border-gray-200 rounded-lg p-6 bg-white">
+            <div class="flex items-center gap-2 font-semibold mb-4 text-lg"><i class="pi pi-phone"></i> Contact</div>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+              <div class="info-block">
+                <div class="info-label">Status</div>
+                <div class="info-value">Active</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Class</div>
+                <div class="info-value">Class 1</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Location</div>
+                <div class="info-value">Location</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Father Name</div>
+                <div class="info-value">Pending</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Mother Name</div>
+                <div class="info-value">Class 3</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Mother Maiden Name</div>
+                <div class="info-value">Location C</div>
+              </div>
+            </div>
+          </div>
+          <div class="border border-gray-200 rounded-lg p-6 bg-white">
+            <div class="flex items-center gap-2 font-semibold mb-4 text-lg"><i class="pi pi-home"></i> Address</div>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+              <div class="info-block">
+                <div class="info-label">Status</div>
+                <div class="info-value">Active</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Class</div>
+                <div class="info-value">Class 1</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Location</div>
+                <div class="info-value">Location</div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template v-else-if="activeTab === 'services'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Services Recommended content...</div>
+        </template>
+        <template v-else-if="activeTab === 'documents'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Documents content...</div>
+        </template>
+        <template v-else-if="activeTab === 'notes'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Notes content...</div>
+        </template>
+        <template v-else-if="activeTab === 'staffs'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Staffs content...</div>
+        </template>
+        <template v-else-if="activeTab === 'schedules'">
+          <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Schedules content...</div>
+        </template>
+      </section>
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import Button from 'primevue/button';
+import 'primeicons/primeicons.css';
+
+const activeTab = ref('personal');
+</script>
+
+
+<style scoped>
+.sidebar-info-block {
+  padding: 0.5rem 0 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0.25rem;
+}
+.sidebar-info-block:last-child {
+  border-bottom: none;
+}
+.sidebar-label {
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  text-align: left;
+}
+.sidebar-value {
+  color: #374151;
+  font-size: 1.08rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0.1rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  text-align: left;
+}
+.tab-btn {
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  background: none !important;
+  color: #6b7280 !important;
+  font-weight: 500;
+  margin-bottom: -2px;
+}
+.tab-active {
+  color: #2563eb !important;
+  border-bottom: 2px solid #2563eb !important;
+  background: none !important;
+}
+.info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.info-label {
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+.info-value {
+  color: #374151;
+  font-size: 1.05rem;
+  margin-left: 1.5rem;
+  margin-bottom: 0.1rem;
+  margin-top: 0.25rem;
+  font-weight: 400;
+  text-align: left;
+}
+</style>

@@ -10,10 +10,13 @@ import Classes from './classes.vue';
 import Students from './students.vue';
 import Staffs from './staffs.vue';
 import ContactsBook from './contactsbook.vue';
+
+import StudentInfo from './StudentInfo.vue';
 import Calendar from './calendar.vue';
 
+
 const currentPage = ref('students');
-const sidebarCollapsed = ref(false);
+const selectedStudent = ref(null);
 
 const pageComponents = {
   dashboard: Dashboard,
@@ -26,15 +29,29 @@ const pageComponents = {
   contactsbook: ContactsBook,
   calendar: Calendar,
 };
+
+function handleStudentSelect(student) {
+  selectedStudent.value = student;
+}
+
+function handleBackToList() {
+  selectedStudent.value = null;
+}
 </script>
 
 <template>
   <div class="flex h-screen">
-    <Sidebar v-show="!sidebarCollapsed" @navigate="(page) => currentPage = page" />
+    <Sidebar @navigate="(page) => currentPage = page" />
     <div class="flex-1 flex flex-col overflow-auto">
-      <Header @toggleSidebar="() => sidebarCollapsed.value = !sidebarCollapsed.value" />
+      <Header />
       <div class="flex-1 overflow-auto">
-        <component :is="pageComponents[currentPage]" />
+        <template v-if="currentPage === 'students'">
+          <StudentInfo v-if="selectedStudent" :student="selectedStudent" @back="handleBackToList" />
+          <Students v-else @student-select="handleStudentSelect" />
+        </template>
+        <template v-else>
+          <component :is="pageComponents[currentPage]" />
+        </template>
       </div>
     </div>
   </div>
