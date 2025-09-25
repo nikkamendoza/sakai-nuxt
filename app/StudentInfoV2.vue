@@ -10,12 +10,12 @@
         </div>
       </div>
       <nav class="flex gap-2 border-b border-gray-200 mb-8 text-sm">
-        <Button icon="pi pi-user" label="Personal Info" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'personal' }" style="border-radius:0;" @click="activeTab = 'personal'" />
-        <Button icon="pi pi-map-marker" label="Services Recommended" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'services' }" style="border-radius:0;" @click="activeTab = 'services'" />
-        <Button icon="pi pi-file" label="Documents" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'documents' }" style="border-radius:0;" @click="activeTab = 'documents'" />
-        <Button icon="pi pi-comment" label="Notes" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'notes' }" style="border-radius:0;" @click="activeTab = 'notes'" />
-        <Button icon="pi pi-users" label="Staffs" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'staffs' }" style="border-radius:0;" @click="activeTab = 'staffs'" />
-        <Button icon="pi pi-calendar" label="Schedules" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'schedules' }" style="border-radius:0;" @click="activeTab = 'schedules'" />
+        <Button icon="pi pi-user" label="Personal Info" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'personal' }" style="border-radius:0;" @click="changeTab('personal')" />
+        <Button icon="pi pi-map-marker" label="Services Recommended" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'services' }" style="border-radius:0;" @click="changeTab('services')" />
+        <Button icon="pi pi-file" label="Documents" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'documents' }" style="border-radius:0;" @click="changeTab('documents')" />
+        <Button icon="pi pi-comment" label="Notes" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'notes' }" style="border-radius:0;" @click="changeTab('notes')" />
+        <Button icon="pi pi-users" label="Staffs" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'staffs' }" style="border-radius:0;" @click="changeTab('staffs')" />
+        <Button icon="pi pi-calendar" label="Schedules" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'schedules' }" style="border-radius:0;" @click="changeTab('schedules')" />
       </nav>
     </div>
     <div class="flex flex-row gap-8 px-12 pb-12">
@@ -149,11 +149,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, toRefs } from 'vue';
 import Button from 'primevue/button';
 import 'primeicons/primeicons.css';
 
-const activeTab = ref('personal');
+const props = defineProps({
+  activeTab: { type: String, default: 'personal' },
+});
+const emit = defineEmits(['tab-change']);
+const activeTab = ref(props.activeTab);
+
+watch(() => props.activeTab, (val) => {
+  activeTab.value = val;
+});
+
+function changeTab(tab) {
+  activeTab.value = tab;
+  emit('tab-change', tab);
+}
 </script>
 
 <style scoped>

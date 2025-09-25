@@ -7,7 +7,11 @@
       <div class="border-l border-gray-300 h-8 mx-2"></div>
       <div class="flex items-center gap-2 text-gray-500 text-sm">
         <i class="pi pi-home"></i>
-        <span>/ STUDENTS</span>
+        <span v-if="currentPage === 'students' && !selectedStudent">/ Students</span>
+        <span v-else-if="currentPage === 'students' && selectedStudent">
+          / Students<span v-if="studentTab"> / {{ studentTabLabel }}</span>
+        </span>
+        <span v-else>/ {{ pageLabel }}</span>
       </div>
     </div>
     <div class="flex items-center gap-0">
@@ -26,7 +30,36 @@
 </template>
 
 <script setup>
-// No logic needed for static header
+import { computed } from 'vue';
+const props = defineProps({
+  currentPage: { type: String, required: true },
+  selectedStudent: { type: Object, default: null },
+  studentTab: { type: String, default: '' },
+});
+
+const pageLabels = {
+  dashboard: 'Dashboard',
+  myschool: 'My School',
+  locations: 'Locations',
+  rooms: 'Rooms',
+  classes: 'Classes',
+  students: 'Students',
+  staffs: 'Staffs',
+  contactsbook: 'Contacts Book',
+  calendar: 'Calendar',
+};
+
+const studentTabLabels = {
+  personal: 'Personal Info',
+  services: 'Services Recommended',
+  documents: 'Documents',
+  notes: 'Notes',
+  staffs: 'Staffs',
+  schedules: 'Schedules',
+};
+
+const pageLabel = computed(() => pageLabels[props.currentPage] || props.currentPage);
+const studentTabLabel = computed(() => studentTabLabels[props.studentTab] || props.studentTab);
 </script>
 
 <style scoped>

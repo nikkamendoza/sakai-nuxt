@@ -10,13 +10,12 @@ import Classes from './classes.vue';
 import Students from './students.vue';
 import Staffs from './staffs.vue';
 import ContactsBook from './contactsbook.vue';
-
 import StudentInfoV2 from './StudentInfoV2.vue';
 import Calendar from './calendar.vue';
 
-
 const currentPage = ref('students');
 const selectedStudent = ref(null);
+const studentTab = ref('personal');
 
 const pageComponents = {
   dashboard: Dashboard,
@@ -32,10 +31,15 @@ const pageComponents = {
 
 function handleStudentSelect(student) {
   selectedStudent.value = student;
+  studentTab.value = 'personal';
 }
 
 function handleBackToList() {
   selectedStudent.value = null;
+}
+
+function handleStudentTabChange(tab) {
+  studentTab.value = tab;
 }
 </script>
 
@@ -43,10 +47,16 @@ function handleBackToList() {
   <div class="flex h-screen">
     <Sidebar @navigate="(page) => currentPage = page" />
     <div class="flex-1 flex flex-col overflow-auto">
-      <Header />
+  <Header :currentPage="currentPage" :selectedStudent="selectedStudent" :studentTab="studentTab" />
       <div class="flex-1 overflow-auto">
         <template v-if="currentPage === 'students'">
-          <StudentInfoV2 v-if="selectedStudent" :student="selectedStudent" @back="handleBackToList" />
+          <StudentInfoV2
+            v-if="selectedStudent"
+            :student="selectedStudent"
+            :activeTab="studentTab"
+            @tab-change="handleStudentTabChange"
+            @back="handleBackToList"
+          />
           <Students v-else @student-select="handleStudentSelect" />
         </template>
         <template v-else>
