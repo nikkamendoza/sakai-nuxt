@@ -11,7 +11,7 @@ import Students from './students.vue';
 import Staffs from './staffs.vue';
 import ContactsBook from './contactsbook.vue';
 
-import StudentInfo from './StudentInfo.vue';
+import StudentInfoV2 from './StudentInfoV2.vue';
 import Calendar from './calendar.vue';
 
 
@@ -46,7 +46,7 @@ function handleBackToList() {
       <Header />
       <div class="flex-1 overflow-auto">
         <template v-if="currentPage === 'students'">
-          <StudentInfo v-if="selectedStudent" :student="selectedStudent" @back="handleBackToList" />
+          <StudentInfoV2 v-if="selectedStudent" :student="selectedStudent" @back="handleBackToList" />
           <Students v-else @student-select="handleStudentSelect" />
         </template>
         <template v-else>
