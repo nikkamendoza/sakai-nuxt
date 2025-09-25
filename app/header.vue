@@ -6,12 +6,23 @@
       </button>
       <div class="border-l border-gray-300 h-8 mx-2"></div>
       <div class="flex items-center gap-2 text-gray-500 text-sm">
-        <i class="pi pi-home"></i>
-        <span v-if="currentPage === 'students' && !selectedStudent">/ Students</span>
-        <span v-else-if="currentPage === 'students' && selectedStudent">
-          / Students<span v-if="studentTab"> / {{ studentTabLabel }}</span>
-        </span>
-        <span v-else>/ {{ pageLabel }}</span>
+        <i class="pi pi-home cursor-pointer hover:text-blue-600" @click="$emit('navigate', 'dashboard')"></i>
+        <template v-if="currentPage === 'students' && !selectedStudent">
+          <span class="mx-1">/</span>
+          <span class="cursor-pointer hover:text-blue-600" @click="$emit('navigate', 'students')">Students</span>
+        </template>
+        <template v-else-if="currentPage === 'students' && selectedStudent">
+          <span class="mx-1">/</span>
+          <span class="cursor-pointer hover:text-blue-600" @click="$emit('navigate', 'students')">Students</span>
+          <template v-if="studentTab">
+            <span class="mx-1">/</span>
+            <span class="cursor-pointer hover:text-blue-600" @click="$emit('student-tab-navigate', studentTab)">{{ studentTabLabel }}</span>
+          </template>
+        </template>
+        <template v-else>
+          <span class="mx-1">/</span>
+          <span class="cursor-pointer hover:text-blue-600" @click="$emit('navigate', currentPage)">{{ pageLabel }}</span>
+        </template>
       </div>
     </div>
     <div class="flex items-center gap-0">

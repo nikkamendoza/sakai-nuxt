@@ -41,13 +41,38 @@ function handleBackToList() {
 function handleStudentTabChange(tab) {
   studentTab.value = tab;
 }
+
+function handleBreadcrumbNavigate(page) {
+  if (page === 'students') {
+    selectedStudent.value = null;
+    currentPage.value = 'students';
+  } else if (page === 'dashboard') {
+    selectedStudent.value = null;
+    currentPage.value = 'dashboard';
+  } else {
+    selectedStudent.value = null;
+    currentPage.value = page;
+  }
+}
+
+function handleBreadcrumbTabNavigate(tab) {
+  if (selectedStudent.value) {
+    studentTab.value = tab;
+  }
+}
 </script>
 
 <template>
   <div class="flex h-screen">
     <Sidebar @navigate="(page) => currentPage = page" />
     <div class="flex-1 flex flex-col overflow-auto">
-  <Header :currentPage="currentPage" :selectedStudent="selectedStudent" :studentTab="studentTab" />
+      <Header
+        :currentPage="currentPage"
+        :selectedStudent="selectedStudent"
+        :studentTab="studentTab"
+        @navigate="handleBreadcrumbNavigate"
+        @student-tab-navigate="handleBreadcrumbTabNavigate"
+      />
       <div class="flex-1 overflow-auto">
         <template v-if="currentPage === 'students'">
           <StudentInfoV2

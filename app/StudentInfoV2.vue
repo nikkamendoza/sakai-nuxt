@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50">
     <div class="px-12 pt-12">
       <div class="flex items-center justify-between mb-4">
-        <h1 class="text-2xl font-semibold text-gray-700">Personal Information</h1>
+        <h1 class="text-2xl font-semibold text-gray-700">{{ tabTitles[activeTab] }}</h1>
         <div class="flex gap-2">
           <Button icon="pi pi-pencil" label="Edit" class="p-button-outlined p-button-sm header-btn-edit" />
           <Button icon="pi pi-print" class="p-button-outlined p-button-sm header-btn-print" />
@@ -149,7 +149,7 @@
 </template>
 
 <script setup>
-import { ref, watch, toRefs } from 'vue';
+import { ref, watch } from 'vue';
 import Button from 'primevue/button';
 import 'primeicons/primeicons.css';
 
@@ -158,6 +158,15 @@ const props = defineProps({
 });
 const emit = defineEmits(['tab-change']);
 const activeTab = ref(props.activeTab);
+
+const tabTitles = {
+  personal: 'Personal Information',
+  services: 'Services Recommended',
+  documents: 'Documents',
+  notes: 'Notes',
+  staffs: 'Staffs',
+  schedules: 'Schedules',
+};
 
 watch(() => props.activeTab, (val) => {
   activeTab.value = val;
