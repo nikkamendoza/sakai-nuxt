@@ -4,19 +4,27 @@
       <div class="flex items-center justify-between mb-4">
         <h1 class="text-2xl font-semibold text-gray-700">{{ tabTitles[activeTab] }}</h1>
         <div class="flex gap-2">
-          <Button icon="pi pi-pencil" label="Edit" class="p-button-outlined p-button-sm header-btn-edit" />
           <Button icon="pi pi-print" class="p-button-outlined p-button-sm header-btn-print" />
           <Button icon="pi pi-trash" class="p-button-outlined p-button-danger p-button-sm header-btn-delete" />
         </div>
       </div>
-      <nav class="flex gap-2 border-b border-gray-200 mb-8 text-sm">
-        <Button icon="pi pi-user" label="Personal Info" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'personal' }" style="border-radius:0;" @click="changeTab('personal')" />
-        <Button icon="pi pi-map-marker" label="Services Recommended" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'services' }" style="border-radius:0;" @click="changeTab('services')" />
-        <Button icon="pi pi-file" label="Documents" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'documents' }" style="border-radius:0;" @click="changeTab('documents')" />
-        <Button icon="pi pi-comment" label="Notes" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'notes' }" style="border-radius:0;" @click="changeTab('notes')" />
-        <Button icon="pi pi-users" label="Staffs" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'staffs' }" style="border-radius:0;" @click="changeTab('staffs')" />
-        <Button icon="pi pi-calendar" label="Schedules" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'schedules' }" style="border-radius:0;" @click="changeTab('schedules')" />
+      <nav class="flex items-center border-b border-gray-200 mb-2 text-sm">
+        <div class="flex gap-2">
+          <Button icon="pi pi-user" label="Personal Info" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'personal' }" style="border-radius:0;" @click="changeTab('personal')" />
+          <Button icon="pi pi-map-marker" label="Services Recommended" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'services' }" style="border-radius:0;" @click="changeTab('services')" />
+          <Button icon="pi pi-file" label="Documents" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'documents' }" style="border-radius:0;" @click="changeTab('documents')" />
+          <Button icon="pi pi-comment" label="Notes" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'notes' }" style="border-radius:0;" @click="changeTab('notes')" />
+          <Button icon="pi pi-users" label="Staffs" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'staffs' }" style="border-radius:0;" @click="changeTab('staffs')" />
+          <Button icon="pi pi-calendar" label="Schedules" class="p-button-text tab-btn" :class="{ 'tab-active': activeTab === 'schedules' }" style="border-radius:0;" @click="changeTab('schedules')" />
+        </div>
       </nav>
+      <div v-if="activeTab === 'personal'" class="mb-3 flex justify-end">
+        <Button v-if="!editMode" icon="pi pi-pencil" label="Edit" class="p-button-outlined p-button-sm header-btn-edit" @click="startEdit" />
+        <div v-else class="flex gap-2">
+          <Button label="Save" class="p-button-success p-button-sm" @click="saveEdit" />
+          <Button label="Cancel" class="p-button-secondary p-button-sm" @click="cancelEdit" />
+        </div>
+      </div>
     </div>
     <div class="flex flex-row gap-8 px-12 pb-12">
       <aside v-if="activeTab === 'personal'" class="w-1/4 bg-white p-8 border border-gray-200 rounded-lg flex flex-col items-center">
@@ -24,27 +32,69 @@
         <div class="w-full">
           <div class="sidebar-info-block">
             <div class="sidebar-label">First Name</div>
-            <div class="sidebar-value">John</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.firstName" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.firstName }}
+              </template>
+            </div>
           </div>
           <div class="sidebar-info-block">
             <div class="sidebar-label">Last Name</div>
-            <div class="sidebar-value">Doe</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.lastName" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.lastName }}
+              </template>
+            </div>
           </div>
           <div class="sidebar-info-block">
             <div class="sidebar-label">Date of Birth</div>
-            <div class="sidebar-value">September 21,2025</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.dob" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.dob }}
+              </template>
+            </div>
           </div>
           <div class="sidebar-info-block">
             <div class="sidebar-label">Medication</div>
-            <div class="sidebar-value">Tylenol</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.medication" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.medication }}
+              </template>
+            </div>
           </div>
           <div class="sidebar-info-block">
             <div class="sidebar-label">Diagnosis</div>
-            <div class="sidebar-value">Bipolar</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.diagnosis" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.diagnosis }}
+              </template>
+            </div>
           </div>
           <div class="sidebar-info-block">
             <div class="sidebar-label">Allergies</div>
-            <div class="sidebar-value">Seafood</div>
+            <div class="sidebar-value">
+              <template v-if="editMode">
+                <InputText v-model="editData.allergies" class="w-full mb-1" />
+              </template>
+              <template v-else>
+                {{ personalInfo.allergies }}
+              </template>
+            </div>
           </div>
         </div>
       </aside>
@@ -148,16 +198,43 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, watch } from 'vue';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 import 'primeicons/primeicons.css';
+
 
 const props = defineProps({
   activeTab: { type: String, default: 'personal' },
 });
 const emit = defineEmits(['tab-change']);
 const activeTab = ref(props.activeTab);
+
+// Editable data state
+const personalInfo = ref({
+  firstName: 'John',
+  lastName: 'Doe',
+  dob: 'September 21,2025',
+  medication: 'Tylenol',
+  diagnosis: 'Bipolar',
+  allergies: 'Seafood',
+});
+const editMode = ref(false);
+const editData = ref({ ...personalInfo.value });
+
+function startEdit() {
+  editData.value = { ...personalInfo.value };
+  editMode.value = true;
+}
+function saveEdit() {
+  personalInfo.value = { ...editData.value };
+  editMode.value = false;
+}
+function cancelEdit() {
+  editMode.value = false;
+}
 
 const tabTitles = {
   personal: 'Personal Information',
@@ -177,6 +254,18 @@ function changeTab(tab) {
   emit('tab-change', tab);
 }
 </script>
+
+<style scoped>
+.input-edit {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  background: #f9fafb;
+  color: #374151;
+}
+</style>
 
 <style scoped>
 .sidebar-info-block {

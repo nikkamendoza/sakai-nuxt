@@ -5,7 +5,7 @@
         <i class="pi pi-chevron-left text-xl"></i>
       </button>
       <div class="border-l border-gray-300 h-8 mx-2"></div>
-      <div class="flex items-center gap-2 text-gray-500 text-sm">
+  <div class="flex items-center gap-2 text-gray-500 text-sm uppercase">
         <i class="pi pi-home cursor-pointer hover:text-blue-600" @click="$emit('navigate', 'dashboard')"></i>
         <template v-if="currentPage === 'students' && !selectedStudent">
           <span class="mx-1">/</span>

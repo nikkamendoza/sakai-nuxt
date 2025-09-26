@@ -9,8 +9,7 @@
     <div v-for="(section, idx) in ['FAVORITES','PREMISES','EDUCANDS','ASSOCIATES','APPS']" :key="section" class="sidebar-section mb-4">
       <div class="text-xs font-semibold text-blue-200 mb-2">{{ section }}</div>
       <div v-for="item in menuItems.filter(i => i.section === section)" :key="item.page"
-        class="flex items-center gap-2 py-2 cursor-pointer rounded"
-        :class="selectedPage === item.page ? 'bg-blue-600' : 'hover:bg-blue-600'"
+  :class="['flex items-center gap-2 py-2 cursor-pointer rounded', selectedPage === item.page ? 'bg-blue-600' : '']"
         @click="handleNavigate(item.page)"
       >
         <i :class="item.icon"></i>
@@ -30,7 +29,7 @@ const menuItems = [
   { label: 'Dashboard', icon: 'pi pi-home', page: 'dashboard', section: 'FAVORITES' },
   { label: 'My School', icon: 'pi pi-building', page: 'myschool', section: 'PREMISES' },
   { label: 'Locations', icon: 'pi pi-map-marker', page: 'locations', section: 'PREMISES' },
-  { label: 'Rooms', icon: 'pi pi-door', page: 'rooms', section: 'PREMISES' },
+  { label: 'Rooms', icon: 'pi pi-home', page: 'rooms', section: 'PREMISES' },
   { label: 'Classes', icon: 'pi pi-users', page: 'classes', section: 'EDUCANDS' },
   { label: 'Students', icon: 'pi pi-id-card', page: 'students', section: 'EDUCANDS' },
   { label: 'Staffs', icon: 'pi pi-user', page: 'staffs', section: 'ASSOCIATES' },
@@ -48,5 +47,15 @@ function handleNavigate(page) {
 .sidebar {
   min-width: 16rem;
   max-width: 16rem;
+}
+.sidebar-section > div.flex.items-center {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition: background 0.15s;
+}
+.sidebar-section > div.flex.items-center:hover {
+  background-color: #2563eb !important;
 }
 </style>
