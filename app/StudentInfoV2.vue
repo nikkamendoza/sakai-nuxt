@@ -178,16 +178,65 @@
             </div>
           </template>
           <template v-else-if="activeTab === 'services'">
-            <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Services Recommended content...</div>
+            <div class="border border-gray-200 rounded-lg p-6 bg-white">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                  <i class="pi pi-lightbulb mr-2"></i> Available
+                </div>
+                <Button icon="pi pi-plus" label="Add Therapy Type" class="p-button-outlined p-button-sm" />
+              </div>
+              <div class="grid grid-cols-2 gap-6">
+                <template v-for="(service, idx) in 4" :key="idx">
+                  <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 flex flex-col gap-2">
+                    <div class="flex items-center gap-2 mb-1">
+                      <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600" />
+                      <span class="text-gray-700 font-medium">Service Name</span>
+                      <Button icon="pi pi-pencil" class="p-button-text p-button-sm ml-auto" style="height: 1.5rem; width: 1.5rem;" />
+                    </div>
+                    <input type="text" placeholder="Note" class="border border-gray-200 rounded px-2 py-1 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-100" />
+                  </div>
+                </template>
+              </div>
+            </div>
           </template>
           <template v-else-if="activeTab === 'documents'">
-            <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Documents content...</div>
+            <div class="flex flex-col items-center justify-center h-[400px] w-full">
+              <svg width="64" height="80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6">
+                <rect x="12" y="8" width="40" height="56" rx="4" fill="#F3F4F6" stroke="#6B7280" stroke-width="2"/>
+                <path d="M32 8v12a4 4 0 004 4h12" stroke="#6B7280" stroke-width="2"/>
+                <rect x="20" y="32" width="24" height="4" rx="2" fill="#D1D5DB"/>
+                <rect x="20" y="40" width="24" height="4" rx="2" fill="#D1D5DB"/>
+              </svg>
+              <div class="text-lg font-medium text-gray-700 mb-1">No Documents Available</div>
+              <div class="text-gray-500 mb-5">Upload your first document to get started.</div>
+              <Button icon="pi pi-plus" label="Upload Documents" class="p-button-outlined p-button-sm" />
+            </div>
           </template>
           <template v-else-if="activeTab === 'notes'">
-            <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Notes content...</div>
+            <div class="flex flex-col items-center justify-center h-[400px] w-full">
+              <svg width="64" height="80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6">
+                <rect x="12" y="8" width="40" height="56" rx="4" fill="#F3F4F6" stroke="#6B7280" stroke-width="2"/>
+                <path d="M32 8v12a4 4 0 004 4h12" stroke="#6B7280" stroke-width="2"/>
+                <rect x="20" y="32" width="24" height="4" rx="2" fill="#D1D5DB"/>
+                <rect x="20" y="40" width="24" height="4" rx="2" fill="#D1D5DB"/>
+              </svg>
+              <div class="text-lg font-medium text-gray-700 mb-1">No Notes Available</div>
+              <div class="text-gray-500 mb-5">Create your first note to get started.</div>
+              <Button icon="pi pi-plus" label="Create Notes" class="p-button-outlined p-button-sm" />
+            </div>
           </template>
           <template v-else-if="activeTab === 'staffs'">
-            <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Staffs content...</div>
+            <div class="flex flex-col items-center justify-center h-[400px] w-full">
+              <svg width="64" height="80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-6">
+                <rect x="12" y="8" width="40" height="56" rx="4" fill="#F3F4F6" stroke="#6B7280" stroke-width="2"/>
+                <path d="M32 8v12a4 4 0 004 4h12" stroke="#6B7280" stroke-width="2"/>
+                <rect x="20" y="32" width="24" height="4" rx="2" fill="#D1D5DB"/>
+                <rect x="20" y="40" width="24" height="4" rx="2" fill="#D1D5DB"/>
+              </svg>
+              <div class="text-lg font-medium text-gray-700 mb-1">No Staffs Available</div>
+              <div class="text-gray-500 mb-5">Add your first staff to get started.</div>
+              <Button icon="pi pi-plus" label="Add Staffs" class="p-button-outlined p-button-sm" />
+            </div>
           </template>
           <template v-else-if="activeTab === 'schedules'">
             <div class="border border-gray-200 rounded-lg p-6 bg-white text-gray-500 text-center">Schedules content...</div>
